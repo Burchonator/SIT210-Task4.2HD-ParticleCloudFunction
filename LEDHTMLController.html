@@ -1,0 +1,243 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>LED Controller</title>
+</head>
+<body>
+
+<h1>LED Controller</h1>
+<p>This HTML page controls three LEDs. I was having touble with Javascript and spent way too many
+hours trying to learn it and was unsuccessful and feel I am falling behind now. 
+However what I have made works! You can only select one checkbox at a time 
+then you must click the back button to reselect a checkbox. 
+Or you can click any button to turn an LED on or off. However you must click the back button on browser
+to reselect. I was really trying to keep is on the same page but this is the best I could do and with
+the time I have juggling work and other subjects.</p>
+
+<!-- Post request to a given url. Opposite of post is get. So here we are posting parameters not 
+getting parameters      THIS STUFF WORKED BELOW-->
+
+<form action="https://api.particle.io/v1/devices/e00fce68664c1a336cd87235/ledToggle?access_token=7faa123f31831b3643d30211501648b9b7f7f610" method="POST">
+	<!-- I could have used buttons Because I just found out I was allowed to -->
+	<div>
+	<input type="checkbox" name="arg" id="chbx_red" value="red"/>Red
+	<input type="checkbox" name="arg" id="chbx_green" value="green"/>Green
+	<input type="checkbox" name="arg" id="chbx_blue" value="blue"/>Blue<br />
+	<button type="submit">Change LEDs</button>
+	</div>
+	
+	<div>
+	<button type="checkbox" name="arg" id="chbx_red" value="red"/>Red</button>
+	<button type="checkbox" name="arg" id="chbx_green" value="green"/>Green</button>
+	<button type="checkbox" name="arg" id="chbx_blue" value="blue"/>Blue</button>
+	</div>
+	<!-- arg is the name parameter I am passing      onchange="changeRedLed()" -->
+</form>
+<!--
+<div id="app">
+	  <h2>{{ led }}</h2>
+	</div>
+	
+	<button @click="button('red')" class="stuff">Red</button>
+
+<!-- development version, includes helpful console warnings (GOT THIS CDN FROM VUEJS.ORG
+https://www.youtube.com/watch?v=FRolRmUIqjk&list=PLylMDDjFIp1AbI1cR_IzTu9FDBVgdquWX&index=6&ab_channel=CodeTime-->
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!--using axios cdn
+
+	
+	<script>
+		var app = new Vue({
+		  el: '#app',
+		  data: {
+			led: 'off'
+		  },
+		  methods: {
+			button(command){
+				this.led = command;
+			}
+		  },
+		  watch:{
+			led: function(){
+				axios.post('https://api.particle.io/v1/devices/e00fce68664c1a336cd87235/ledToggle?access_token=7faa123f31831b3643d30211501648b9b7f7f610', {
+					arg: this.led,
+				})
+				.then(function (response) {
+					console.log(response);
+				  })
+				  .catch(function (error) {
+					console.log(error);
+				  });
+			}
+		  }
+		})
+	</script>
+-->
+
+<!--<div id="particles-js">
+<input type="checkbox" id="chbx_red" onchange="changeRedLed()" name="led_red" value="red"/> Red<br />
+<input type="checkbox" id="chbx_green" onchange="changeGreenLed()" name="led_green" value="green"/> Green<br />
+<input type="checkbox" id="chbx_blue" onchange="changeBlueLed()" name="led_blue" value="blue"/> Blue<br />
+
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/particle-api-js@8/dist/particle.min.js">
+</script>-->
+<!-- <script>
+var Particle = require('particle-api-js');
+var particle = new Particle();
+var token;
+
+particle.login({username: 'mitchell.burcheri@gmail.com', password: 'P4rt1c00lz'}).then(
+  function(data) {
+    token = data.body.access_token;
+  },
+  function (err) {
+    console.log('Could not log in.', err);
+  }
+);
+
+	var myData;
+
+	function changeRedLed() {
+		myData = "red";
+		sendData();
+	}
+
+	function changeGreenLed() {
+		myData = "green";
+		sendData();
+	}
+
+	function changeBlueLed() {
+		myData = "blue";
+		sendData();
+	}
+
+	function sendData(){
+		//particle.callFunction({ deviceId: e00fce68664c1a336cd87235, name: "ledToggle", argument: myData, auth: token });
+	
+		var publishEventPr = particle.publishEvent({ name: "ledToggle", data: JSON.stringify({ ok: true }), auth: token });
+// data was JSON.stringify({ ok: true })
+		publishEventPr.then(
+		  function(data) {
+			if (data.body.ok) { console.log("Event published succesfully") }
+		  },
+		  function(err) {
+			console.log("Failed to publish event: " + err)
+		  }
+		);
+	}
+</script>
+<!--<script defer src="index.js" charset="utf-8"></script>-->
+
+ <!-- src="particles.js" -->
+  <!--
+	/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+/*particlesJS.load('particles-js', 'assets/particles.json', function() {
+  console.log('callback - particles-js config loaded');
+});*/
+
+var Particle = require('particle-api-js');
+var particle = new Particle();
+var token;
+
+particle.login({username: 'mitchell.burcheri@gmail.com', password: 'P4rt1c00lz'}).then(
+  function(data) {
+    token = data.body.access_token;
+  },
+  function (err) {
+    console.log('Could not log in.', err);
+  }
+);
+
+	var myData;
+
+	function changeRedLed() {
+		myData = "red";
+		sendData();
+	}
+
+	function changeGreenLed() {
+		myData = "green";
+		sendData();
+	}
+
+	function changeBlueLed() {
+		myData = "blue";
+		sendData();
+	}
+
+	function sendData(){
+		//particle.callFunction({ deviceId: e00fce68664c1a336cd87235, name: "ledToggle", argument: myData, auth: token });
+	
+		var publishEventPr = particle.publishEvent({ name: "ledToggle", data: myData, auth: token });
+// data was JSON.stringify({ ok: true })
+		publishEventPr.then(
+		  function(data) {
+			if (data.body.ok) { console.log("Event published succesfully") }
+		  },
+		  function(err) {
+			console.log("Failed to publish event: " + err)
+		  }
+		);
+	}
+	/*
+		var publishEventPr = particle.publishEvent({ name: "ledToggle", data: data, auth: token });
+// data was JSON.stringify({ ok: true })
+		publishEventPr.then(
+		  function(data) {
+			if (data.body.ok) { console.log("Event published succesfully") }
+		  },
+		  function(err) {
+			console.log("Failed to publish event: " + err)
+		  }
+		);
+
+</script>
+*?
+	// .toString()
+</script>
+
+<!--  action= https://api.particle.io/v1/devices/0000/led?access_token=0000 
+https://community.particle.io/t/make-simple-web-button-to-send-string-command-to-photon/14591
+
+
+My research:
+https://docs.idew.org/internet-of-things-project/references-for-wiring-and-coding/particle-cloud
+https://levelup.gitconnected.com/how-to-create-a-simple-web-app-using-javascript-d27b28459fad
+https://www.digitalocean.com/community/tutorials/how-to-add-javascript-to-html
+https://docs.particle.io/reference/SDKs/javascript/
+https://stackoverflow.com/questions/13102628/html-checkboxes-with-javascript-functions/13102675
+https://docs.particle.io/tutorials/device-cloud/authentication/
+
+https://docs.particle.io/reference/SDKs/javascript/
+https://nodejs.org/en/download/
+https://www.npmjs.com/get-npm
+\
+
+NEED TO RE LOOK AT
+https://phoenixnap.com/kb/install-node-js-npm-on-windows
+https://www.npmjs.com/package/particle-api-js?activeTab=readme
+https://docs.particle.io/reference/SDKs/javascript/
+
+https://www.youtube.com/watch?v=WAdvHzEDJlg
+https://docs.particle.io/tutorials/developer-tools/cli/
+https://www.youtube.com/watch?v=VjHMvBOZnEs&list=PLylMDDjFIp1AbI1cR_IzTu9FDBVgdquWX
+
+-->
+
+<!--
+<form method="POST" action="">
+<input type="checkbox" name="led_red" value="red"/> Red<br />
+<input type="checkbox" name="led_green" value="green"/> Green<br />
+<input type="checkbox" name="led_blue" value="blue"/> Blue<br />
+
+<!-- <input type="submit" value="Submit">-->
+<!--</form>-->
+
+
+
+
+</body>
+</html> 
